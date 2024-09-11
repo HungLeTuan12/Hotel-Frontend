@@ -49,6 +49,8 @@ const AddRoom = () => {
       setErrorMessage("");
     }, 3000);
   };
+  console.log("Image preview", imagePreview);
+
   return (
     <>
       <section className="container, mt-5 mb-5">
@@ -116,6 +118,12 @@ const AddRoom = () => {
               </div>
               {/* Button */}
               <div className="d-grid d-md-flex mt-2">
+                <Link
+                  to={"/existing-rooms"}
+                  className="btn btn-outline-info ml-5"
+                >
+                  Back
+                </Link>
                 <button className="btn btn-outline-primary ml-5">
                   Save Room
                 </button>
