@@ -1,9 +1,10 @@
 import React from "react";
+import HeaderMain from "../layout/HeaderMain";
 const Home = () => {
   return (
-    <div>
-      <h2>Welcome to the home page</h2>
-    </div>
+    <section>
+      <HeaderMain />
+    </section>
   );
 };
 export default Home;
