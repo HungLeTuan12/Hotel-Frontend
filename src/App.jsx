@@ -14,6 +14,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Room from "./component/room/Room";
 import RoomListing from "./component/room/RoomListing";
 import Admin from "./component/admin/Admin";
+import BookingForm from "./component/booking/BookingForm";
+import CheckOut from "./component/booking/CheckOut";
+import BookingSuccess from "./component/booking/BookingSuccess";
 function App() {
   return (
     <>
@@ -26,8 +29,10 @@ function App() {
             <Route path="/edit-room/:roomId" element={<EditRoom />} />
             <Route path="/existing-rooms" element={<ExistingRoom />} />
             <Route path="/add-room" element={<AddRoom />} />
+            <Route path="/book-room/:roomId" element={<CheckOut />} />
             <Route path="/browse-all-rooms" element={<RoomListing />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/booking-success" element={<BookingSuccess />} />
           </Routes>
           <Footer />
         </Router>

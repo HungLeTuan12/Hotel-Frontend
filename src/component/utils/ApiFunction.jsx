@@ -58,3 +58,53 @@ export async function getRoomById(roomId) {
     throw new Error("Error fetching room");
   }
 }
+// ================ Bookings =========================
+// Booking room
+export async function bookRoom(roomId, booking) {
+  try {
+    const response = await api.post(
+      `api/bookings/room/${roomId}/booking`,
+      booking
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Error booking room");
+  }
+}
+// Get alls booking
+export async function getAllBookings() {
+  try {
+    const response = await api.get(`api/bookings/`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error get all bookings");
+  }
+}
+// Get booking by confirmation code
+export async function getAllBookingByConfirmationCode(confirmationCode) {
+  try {
+    const response = await api.get(
+      `api/bookings/confirmation/${confirmationCode}`
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data);
+    }
+    throw new Error("Error find booking");
+  }
+}
+// Cancel booking
+export async function cancelBooking(bookingId) {
+  try {
+    const response = await api.delete(
+      `api/bookings/booking/${bookingId}/delete`
+    );
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data);
+    }
+    throw new Error("Error cancel booking");
+  }
+}
