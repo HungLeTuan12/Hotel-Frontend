@@ -9,6 +9,9 @@ const Admin = () => {
       <Link className="nav-link" to={"/add-room"}>
         Manage Rooms
       </Link>
+      <Link className="nav-link" to={"/existing-bookings"}>
+        Manage Bookings
+      </Link>
     </section>
   );
 };

@@ -30,7 +30,7 @@ const BookingTable = ({ bookingInfo, handleBookingCancellation }) => {
         onDateChange={filterBookings}
         onFilterChange={filterBookings}
       />
-      <table>
+      <table className="table table-bordered">
         <thead>
           <tr>
             <th>S/N</th>
@@ -60,7 +60,7 @@ const BookingTable = ({ bookingInfo, handleBookingCancellation }) => {
               <td>{booking.numOfAdults}</td>
               <td>{booking.numOfChildren}</td>
               <td>{booking.totalNumOfGuests}</td>
-              <td>{booking.bookingConfirmationCode}</td>
+              <td>{booking.bookingConfirmCode}</td>
               <td>
                 <button
                   className="btn btn-danger btn-sm"

@@ -33,7 +33,7 @@ const DateSlider = ({ onDateChange, onFilterChange }) => {
         onChange={handleSelect}
         className="mb-4"
       />
-      <button className="btn btn-secondary" onClick={handleClearFilter}>
+      <button className="btn btn-hotel" onClick={handleClearFilter}>
         Clear Filter
       </button>
     </>
