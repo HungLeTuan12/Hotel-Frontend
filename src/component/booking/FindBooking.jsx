@@ -7,6 +7,7 @@ import { da } from "date-fns/locale";
 const FindBooking = () => {
   const [confirmationCode, setConfirmationCode] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [bookingInfo, setBookingInfo] = useState({
     id: "",
@@ -60,10 +61,15 @@ const FindBooking = () => {
       setIsDeleted(true);
       setBookingInfo(clearBookingInfo);
       setConfirmationCode("");
+      setSuccessMessage("Booking has been cancelled successfully !!");
       setError("");
     } catch (error) {
       setError("Booking not found !!!");
     }
+    setTimeout(() => {
+      setSuccessMessage("");
+      setIsDeleted(false);
+    }, 2000);
   };
   return (
     <>
@@ -116,7 +122,7 @@ const FindBooking = () => {
         )}
         {isDeleted && (
           <div className="alert alert-success mt-3" role="alert">
-            Booking has been cancelled successfully
+            {successMessage}
           </div>
         )}
       </div>

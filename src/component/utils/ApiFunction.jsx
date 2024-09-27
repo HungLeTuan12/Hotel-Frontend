@@ -108,3 +108,17 @@ export async function cancelBooking(bookingId) {
     throw new Error("Error cancel booking");
   }
 }
+// Get available rooms
+export async function getAvailableRooms(checkInDate, checkOutDate, roomType) {
+  try {
+    const response = await api.get(
+      `api/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`
+    );
+    return response;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data);
+    }
+    throw new Error("Error cancel booking");
+  }
+}
