@@ -7,15 +7,11 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
   // Get all room types
   useEffect(() => {
     getRoomTypes().then((data) => {
-      // console.log("data: ", data);
-
       setRoomTypes(data);
     });
   }, []);
 
   const handleNewRoomInputChange = (e) => {
-    // console.log("e: ", e.target.value);
-
     setNewRoomType(e.target.value);
   };
 
@@ -26,10 +22,6 @@ const RoomTypeSelector = ({ handleRoomInputChange, newRoom }) => {
       setShowRoomTypeInput(false);
     }
   };
-  // roomTypes.map((key, value) => {
-  //   console.log("value: ", value);
-  //   console.log("key", key);
-  // });
   return (
     <>
       {roomTypes.length > 0 && (

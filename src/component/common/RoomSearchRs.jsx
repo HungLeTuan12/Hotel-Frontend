@@ -16,9 +16,14 @@ const RoomSearchRs = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = (e) => {
+    console.log("submit");
+
     e.preventDefault();
     const checkIn = moment(searchQuery.checkInDate);
     const checkOut = moment(searchQuery.checkOutDate);
+    console.log("checkIndATE", searchQuery.checkInDate);
+    console.log("checkIndATE", searchQuery.checkOutDate);
+
     if (!checkIn.isValid() || !checkOut.isValid()) {
       setErrorMessage("Please enter valid date range !");
       return;
@@ -35,6 +40,7 @@ const RoomSearchRs = () => {
     )
       .then((response) => {
         setAvailableRooms(response.data);
+
         setTimeout(() => {
           setIsLoading(false);
         }, 2000);
@@ -46,10 +52,14 @@ const RoomSearchRs = () => {
         setIsLoading(false);
       });
   };
+  console.log("availbale room", availableRooms);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     const checkIn = moment(searchQuery.checkInDate);
     const checkOut = moment(searchQuery.checkOutDate);
+    setSearchQuery({ ...searchQuery, [name]: value });
+
     if (checkIn.isValid() || checkOut.isValid()) {
       setErrorMessage("");
     }
@@ -61,6 +71,7 @@ const RoomSearchRs = () => {
       checkOutDate: "",
       roomType: "",
     });
+    setAvailableRooms([]);
   };
   return (
     <>
@@ -68,26 +79,28 @@ const RoomSearchRs = () => {
         <Form onSubmit={handleSearch}>
           <Row className="justify-content-center">
             <Col xs={12} md={3}>
-              <Form.Group controlId="checkInDate">
+              <Form.Group>
                 <Form.Label>Check-In Date</Form.Label>
                 <Form.Control
                   type="date"
                   name="checkInDate"
+                  id="checkInDate"
                   value={searchQuery.checkInDate}
                   onChange={handleInputChange}
-                  min={moment().format("YYYY-MM-DD")}
+                  // min={moment().format("YYYY-MM-DD")}
                 />
               </Form.Group>
             </Col>
             <Col xs={12} md={3}>
-              <Form.Group controlId="checkOutDate">
+              <Form.Group>
                 <Form.Label>Check-Out Date</Form.Label>
                 <Form.Control
                   type="date"
                   name="checkOutDate"
+                  id="checkOutDate"
                   value={searchQuery.checkOutDate}
                   onChange={handleInputChange}
-                  min={moment().format("YYYY-MM-DD")}
+                  // min={moment().format("YYYY-MM-DD")}
                 />
               </Form.Group>
             </Col>
@@ -108,9 +121,7 @@ const RoomSearchRs = () => {
           </Row>
         </Form>
 
-        {setIsLoading ? (
-          <p>Finding available rooms ....</p>
-        ) : availableRooms ? (
+        {availableRooms ? (
           <RoomSearch results={availableRooms} onClearSearch={clearSearch} />
         ) : (
           <p>No rooms available for the selected dates and room type</p>

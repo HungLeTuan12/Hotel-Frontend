@@ -16,7 +16,7 @@ const Bookings = () => {
       });
     }, 5000);
   });
-  // console.log("bookinInfor", bookingInfo);
+  console.log("bookinInfor", bookingInfo);
 
   const handleBookingCancellation = async (bookingId) => {
     try {
@@ -28,7 +28,7 @@ const Bookings = () => {
     }
   };
   return (
-    <section className="container" style={{ backgroundColor: "whitesmoke" }}>
+    <section className="" style={{ backgroundColor: "whitesmoke" }}>
       <Header title={"Existing Bookings"} />
       {error && (
         <div className="text-danger">

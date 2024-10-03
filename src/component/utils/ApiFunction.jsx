@@ -2,6 +2,13 @@ import axios from "axios";
 export const api = axios.create({
   baseURL: "http://localhost:5454",
 });
+export const getHeader = () => {
+  const token = localStorage.getItem("token");
+  return {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+};
 // Add room
 export async function addRoom(photo, roomType, price) {
   const formData = new FormData();
@@ -120,5 +127,49 @@ export async function getAvailableRooms(checkInDate, checkOutDate, roomType) {
       throw new Error(error.response.data);
     }
     throw new Error("Error cancel booking");
+  }
+}
+// Register
+export async function registrationner(registration) {
+  try {
+    const response = await api.post(`/api/admin/register`, registration);
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.data) {
+      throw new Error(error.response.data);
+    } else {
+      throw new Error("User registration error !!");
+    }
+  }
+}
+// Login
+export async function loginUser(login) {
+  try {
+    const response = await api.post("/api/admin/login", login);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Get user profile
+export async function getUserInfo(userId, token) {
+  try {
+    const response = await api.get(`/api/users/${userId}`, {
+      headers: getHeader(),
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// Delete user
+export async function deleteUser(userId) {
+  try {
+    const response = await api.delete(`/api/users/delete/${userId}`, {
+      headers: getHeader(),
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
 }

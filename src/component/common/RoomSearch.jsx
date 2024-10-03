@@ -4,9 +4,12 @@ import { Button, Col, Row } from "react-bootstrap";
 import RoomPaginator from "./RoomPaginator";
 
 const RoomSearch = ({ results, onClearSearch }) => {
+  console.log("....Loding");
+  console.log("results", results.length);
+
   const [currentPage, setCurrentPage] = useState(1);
   const resultPerpage = 3;
-  const totalResults = results.length();
+  const totalResults = results.length;
   const totalPages = Math.ceil(totalResults / resultPerpage);
 
   const handlePageChange = (pageNumber) => {
@@ -16,6 +19,7 @@ const RoomSearch = ({ results, onClearSearch }) => {
   const startIndex = (currentPage - 1) * resultPerpage;
   const endIndex = startIndex + resultPerpage;
   const paginatedResult = results.slice(startIndex, endIndex);
+
   return (
     <>
       {results.length > 0 ? (
