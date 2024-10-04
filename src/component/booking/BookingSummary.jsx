@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 
 const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
   console.log("payment", payment);
+  console.log("booking", booking);
 
   const checkInDate = moment(booking.checkInDate);
   const checkOutDate = moment(booking.checkOutDate);
@@ -34,9 +35,10 @@ const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
       <p className="">
         Name: <strong>{booking.guestFullName}</strong>
       </p>
-      <p>
-        Email: <strong>{booking.guestEmail}</strong>
+      <p className="">
+        User id: <strong>{booking.userId}</strong>
       </p>
+
       <p>
         Check-In Date:{" "}
         <strong>{moment(booking.checkInDate).format("L")}</strong>

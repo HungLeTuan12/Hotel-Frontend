@@ -5,17 +5,18 @@ import { Form, FormControl } from "react-bootstrap";
 import BookingSummary from "./BookingSummary";
 import moment from "moment";
 const BookingForm = () => {
+  const userId = localStorage.getItem("userId");
   const [isValidated, setIsValidated] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [roomPrice, setRoomPrice] = useState(0);
   const [booking, setBooking] = useState({
     guestFullName: "",
-    guestEmail: "",
     checkInDate: "",
     checkOutDate: "",
     numOfAdults: "",
     numOfChildren: "",
+    userId: userId,
   });
 
   const roomId = useParams();
@@ -97,7 +98,9 @@ const BookingForm = () => {
   // Handle booking
   const handleBooking = async () => {
     try {
-      const confirmationCode = await bookRoom(roomId.roomId, booking);
+      const confirmationCode = await bookRoom(roomId.roomId, userId, booking);
+      console.log("bookingconfirm", booking);
+
       setIsSubmitted(true);
       navigate("/booking-success", { state: { message: confirmationCode } });
     } catch (error) {
@@ -113,6 +116,19 @@ const BookingForm = () => {
             <div className="card card-body">
               <h4 className="card card-title text-center">Reserve Room</h4>
               <Form noValidate validated={isValidated} onSubmit={handleSubmit}>
+                <Form.Group>
+                  <FormControl
+                    required
+                    type="hidden"
+                    id="userId"
+                    name="userId"
+                    value={userId}
+                    onChange={handleInputChange}
+                  ></FormControl>
+                  <Form.Control.Feedback type="invalid">
+                    Please enter your full name
+                  </Form.Control.Feedback>
+                </Form.Group>
                 {/* Full name */}
                 <Form.Group>
                   <Form.Label htmlFor="guestFullName" className="hotel-color">
@@ -131,24 +147,7 @@ const BookingForm = () => {
                     Please enter your full name
                   </Form.Control.Feedback>
                 </Form.Group>
-                {/* Email */}
-                <Form.Group>
-                  <Form.Label htmlFor="guestEmail" className="hotel-color">
-                    Email:
-                  </Form.Label>
-                  <FormControl
-                    required
-                    type="text"
-                    id="guestEmail"
-                    name="guestEmail"
-                    value={booking.guestEmail}
-                    placeholder="Enter your email"
-                    onChange={handleInputChange}
-                  ></FormControl>
-                  <Form.Control.Feedback type="invalid">
-                    Please enter your email address
-                  </Form.Control.Feedback>
-                </Form.Group>
+
                 {/* Check-in and check-out date */}
                 <fieldset style={{ border: "2px" }}>
                   <legend className="mt-2">Lodging period</legend>

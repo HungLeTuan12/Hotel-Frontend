@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { registrationner } from "../utils/ApiFunction";
+import { Link } from "react-router-dom";
 const Register = () => {
   const [registration, setRegistration] = useState({
     firstName: "",
@@ -39,7 +40,7 @@ const Register = () => {
       {successMessage && (
         <p className="alert alert-success">{successMessage}</p>
       )}
-      <h2>Register</h2>
+      <h2 className="text-center">Register</h2>
       <form onSubmit={handleRegistration} action="">
         {/* First name */}
         <div className="row mb-3">

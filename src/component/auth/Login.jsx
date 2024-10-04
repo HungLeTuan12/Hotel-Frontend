@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { loginUser } from "../utils/ApiFunction";
 import { Link, useNavigate } from "react-router-dom";
-import jwtDecode from "jwtDecode";
+import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "./AuthProvider";
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,12 +16,18 @@ const Login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Login", login);
+
     const success = await loginUser(login);
+    console.log("success", success);
+
     if (success) {
-      const token = success.token;
+      const token = success.jwt;
+      console.log("success token: ", token);
+
       const decodedToken = jwtDecode(token);
       localStorage.setItem("token", token);
-      localStorage.setItem("userId", decodedToken.userId);
+      localStorage.setItem("userId", success.id);
       localStorage.setItem("userRole", decodedToken.roles.join(","));
       navigate("/");
       window.location.reload();

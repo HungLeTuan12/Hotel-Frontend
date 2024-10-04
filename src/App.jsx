@@ -44,7 +44,7 @@ function App() {
             <Route path="/find-booking" element={<FindBooking />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:userId" element={<Profile />} />
             <Route path="/logout" element={<Logout />} />
           </Routes>
           <Footer />

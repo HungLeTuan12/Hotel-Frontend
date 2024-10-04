@@ -67,10 +67,10 @@ export async function getRoomById(roomId) {
 }
 // ================ Bookings =========================
 // Booking room
-export async function bookRoom(roomId, booking) {
+export async function bookRoom(roomId, userId, booking) {
   try {
     const response = await api.post(
-      `api/bookings/room/${roomId}/booking`,
+      `api/bookings/room/${roomId}/booking/${userId}`,
       booking
     );
     return response.data;
@@ -171,5 +171,18 @@ export async function deleteUser(userId) {
     return response.data;
   } catch (error) {
     console.log(error);
+  }
+}
+// Get booking history
+export async function getBookingHistory(userId) {
+  console.log("userIdddd", userId);
+
+  try {
+    console.log("userIdddd", userId);
+
+    const response = await api.get(`/api/users/get-booking-history/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error get booking history");
   }
 }
